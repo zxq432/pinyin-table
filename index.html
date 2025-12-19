@@ -176,6 +176,18 @@
     return p.replace(/ü/g, 'v');
   }
 
+  // Main tone position function
+  const pos4tone = (py) => {
+    if (['m', 'n', 'ng', 'ê'].includes(py)) return 0;
+    if (/^h(?:m|ng?)$/.test(py)) return 1;
+    if (/(?:iu|ui)$/.test(py)) return py.length - 1;
+    for (const c of 'aoeiuü') {
+      const i = py.indexOf(c);
+      if (i !== -1) return i;
+    }
+    return 4;
+  };
+
   function playAudio(url) {
     return new Promise((resolve, reject) => {
       const audio = new Audio(url);
@@ -268,10 +280,17 @@
   }
 
   function createVowelTooltip(th, vowel) {
-    const idx = toneMap?.TONE_INDEX?.[vowel];
+    const idx = pos4tone(vowel);
+    if (idx === 4) {
+      console.log("createVowelTooltip failed for:", vowel, "element:", th, "idx:", idx, "letters:", letters);
+      return;
+    }
+
     const letters = toneMap.TONED_VOWELS[vowel[idx]];
-    //console.log("createVowelTooltip called for:", vowel, "element:", th, "idx:", idx, "letters:", letters);
-    if (!letters || letters.length !== 5) return;
+    if (!letters || letters.length !== 5) {
+      console.log("createVowelTooltip failed for:", vowel, "element:", th, "idx:", idx, "letters:", letters);
+      return;
+    }
 
     const div = document.createElement('div');
     div.className = 'tooltiptext';

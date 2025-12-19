@@ -7,7 +7,7 @@ Interactive pinyin table with:
 - Decomposed mode ("拼" switch): hear consonant + vowel + full pinyin
 - Column & row highlight on hover
 
-🔗 Live demo: https://zxq432.github.io/pinyin-table
+🔗 Live demo: https://zxq432.github.io/py
 
 ## Features
 - Supports 两拼 (e.g., ba) and 三拼 (e.g., jia)
