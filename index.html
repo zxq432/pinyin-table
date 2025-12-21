@@ -239,7 +239,7 @@
   
       }
       // Full pinyin from hz
-      await playAudio(`./d/hz/${toFilename(consonant)}/${toFilename(py)}${match.suffix}`);
+      await playAudio(`./d/${toFilename(consonant)}/${toFilename(py)}${match.suffix}`);
     } else {
       // === Basic mode (or non-decomposable) ===
       await playAudio(`./d/py/${toFilename(py)}${match.suffix}`);
